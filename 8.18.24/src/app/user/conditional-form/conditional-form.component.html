@@ -1,0 +1,87 @@
+<div class="container mt-5">
+  <h1 class="text-center">{{ formData?.name }}</h1>
+  <p class="text-center text-muted">{{ formData?.description }}</p>
+ 
+  <form *ngIf="formData" (submit)="submitForm($event)">
+ 
+    <div class="card my-4">
+      <div class="card-header">
+        <h4>Email</h4>
+        <p class="text-muted">Please provide your email address</p>
+      </div>
+      <div class="card-body">
+        <div class="form-group mb-3">
+          <label>Email Address</label>
+          <input type="email" class="form-control" placeholder="Enter your email" required [(ngModel)]="formData.email" name="email" />
+          <div *ngIf="formSubmitted && !formData.email" style="color: red; font-weight: bold; font-size: 14px; margin-top: 5px; margin-left: 4px;">
+            * Email is required
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <div *ngFor="let section of formData?.sections" class="card my-4">
+      <div class="card-header">
+        <h4>{{ section.sectionName }}</h4>
+        <p class="text-muted">{{ section.description }}</p>
+      </div>
+ 
+      <div class="card-body">
+        <div *ngFor="let question of section?.questions" class="form-group mb-3">
+          <label>{{ question.question }}</label>
+          <div *ngIf="question.answerOptions?.length === 0">No answer options available</div>
+ 
+          <div *ngIf="question.answerOptions?.length > 0" [ngSwitch]="getAnswerTypeName(question.answerOptions[0].answerTypeId)">
+            <input *ngSwitchCase="'text'" type="text" class="form-control" placeholder="Enter your answer" (input)="handleOptionSelect($event, null, section, question) ; handleConstraints($event , section, question)" />
+            <input *ngSwitchCase="'number'" type="number" class="form-control" placeholder="Enter your answer" (input)="handleOptionSelect($event, null, section, question) ; handleConstraints($event , section, question)" />
+            <input *ngSwitchCase="'date'" type="date" class="form-control" (input)="handleOptionSelect($event, null, section, question)" />
+     
+            <div *ngSwitchCase="'radio'">
+              <div *ngFor="let option of question.answerOptions">
+                <input type="radio" [name]="'option_' + question.id" [value]="option.optionValue" (change)="handleOptionSelect($event, option, section, question)" />
+                {{ option.optionValue }}
+              </div>
+            </div>
+     
+            <div *ngSwitchCase="'checkbox'">
+              <div *ngFor="let option of question.answerOptions; let i = index">
+                <input type="checkbox" [name]="'option_' + question.id + '_' + i" [value]="option.optionValue" (change)="handleOptionSelect($event, option, section, question)" />
+                {{ option.optionValue }}
+              </div>
+            </div>
+     
+            <div *ngSwitchCase="'multi-select'">
+              <select class="form-control" multiple (change)="handleMultiSelect($event, question, section)">
+                  <option *ngFor="let option of question.answerOptions" [value]="option.optionValue">
+                      {{ option.optionValue }}
+                  </option>
+              </select>
+          </div>
+           
+          </div>
+ 
+          <div *ngIf="formSubmitted && question.required && (!selectedAnswers[section.id] || !selectedAnswers[section.id][question.id])"
+                  style="color: red; font-weight: bold; font-size: 14px; margin-top: 5px; margin-left: 4px;"
+              >
+                * Field is required
+              </div>
+           
+
+              <div *ngIf="formSubmittedConstraints && constraintValid[section.id + '_' + question.id]" 
+              style="color: red; font-weight: bold; font-size: 14px; margin-top: 5px; margin-left: 4px;">
+            * {{ question.warningMessage || 'Constraint validation failed' }}
+          </div>
+     
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+
+
+
+
+
+

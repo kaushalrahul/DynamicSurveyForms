@@ -1,0 +1,47 @@
+h1, h2 {
+    margin: 0;
+    padding: 10px 0;
+  }
+  
+  h1 {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+    color: #555;
+  }
+  
+  p {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+  
+  mat-checkbox, mat-radio-button {
+    margin: 5px 0;
+  }
+  
+  mat-chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  mat-chip {
+    background: #e0e0e0;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  mat-form-field input[type='number'] {
+    width: 100%;
+  }
+  
+  mat-chip-list, mat-datepicker-toggle {
+    margin-top: 10px;
+  }
+  

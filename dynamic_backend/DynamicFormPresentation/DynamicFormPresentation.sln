@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormPresentation", "DynamicFormPresentation.csproj", "{7EAF4202-683A-4292-839F-F51660E82B95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormServices", "..\DynamicFormServices\DynamicFormServices.csproj", "{1B79DC17-C0CA-4BC0-9A1D-82BEC6B61CEC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormRepos", "..\DynamicFormRepos\DynamicFormRepos.csproj", "{A72DDC86-46D5-43FB-874E-85C2E6D17A1D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAcces", "..\DataAcces\DataAcces.csproj", "{33D1772D-B176-475E-95B3-63F002A72AB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicForm.Test", "..\DynamicForm.Test\DynamicForm.Test.csproj", "{E79896D1-345B-48C8-B449-1E2D29A9E5C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7EAF4202-683A-4292-839F-F51660E82B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EAF4202-683A-4292-839F-F51660E82B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EAF4202-683A-4292-839F-F51660E82B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EAF4202-683A-4292-839F-F51660E82B95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B79DC17-C0CA-4BC0-9A1D-82BEC6B61CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B79DC17-C0CA-4BC0-9A1D-82BEC6B61CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B79DC17-C0CA-4BC0-9A1D-82BEC6B61CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B79DC17-C0CA-4BC0-9A1D-82BEC6B61CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A72DDC86-46D5-43FB-874E-85C2E6D17A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A72DDC86-46D5-43FB-874E-85C2E6D17A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A72DDC86-46D5-43FB-874E-85C2E6D17A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A72DDC86-46D5-43FB-874E-85C2E6D17A1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D1772D-B176-475E-95B3-63F002A72AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D1772D-B176-475E-95B3-63F002A72AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D1772D-B176-475E-95B3-63F002A72AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D1772D-B176-475E-95B3-63F002A72AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E79896D1-345B-48C8-B449-1E2D29A9E5C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E79896D1-345B-48C8-B449-1E2D29A9E5C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E79896D1-345B-48C8-B449-1E2D29A9E5C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E79896D1-345B-48C8-B449-1E2D29A9E5C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8697F54F-9037-4E1F-8101-DD513857BB35}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,128 @@
+<div class="content-wrapper" [class.collapsed]="isSidebarCollapsed">
+  <section class="main">
+    <div class="container">
+      <!-- Dynamic page title -->
+      <div class="heading-wrapper">
+        <p>{{ pageTitle || 'Create New Question' }}</p> <!-- Fallback title if pageTitle is not set -->
+      </div>
+
+      <div class="main-content">
+        <div class="form-wrapper">
+          <form (ngSubmit)="onSubmit()">
+            <div class="form-metadata row">
+              <div class="input-wrapper form-name-wrapper col-12 col-md-4">
+                <label for="questionName">Question<span class="required"> *</span></label>
+                <input type="text" placeholder="Enter Question" id="questionName" [(ngModel)]="questionName" name="questionName" required>
+              </div>
+
+              <div class="input-wrapper col-12 col-md-4">
+                <label for="sortOrder">Sort Order <span class="required"> *</span></label>
+                <input type="number" placeholder="Sort Order" id="sortOrder" [(ngModel)]="sortOrder" name="sortOrder" required>
+              </div>
+
+              <div class="input-wrapper form-description-wrapper col-12 col-md-4 mt-md-0 mt-3">
+                <label for="responseType">Response Type</label>
+                <select id="responseType" [(ngModel)]="responseType" name="responseType" (change)="onResponseTypeChange()" required>
+                  <option selected value="" disabled>Select response type</option>
+                  <option value="text">Text</option>
+                  <option value="radio">Radio</option>
+                  <option value="checkbox">Checkbox</option>
+                  <option value="multi-select">Multi-select</option>
+                  <option value="number">Number</option>
+                  <option value="date">Date</option>
+                </select>
+              </div>
+              </div>
+              
+              <!-- Options Field (Visible only for specific response types) -->
+              <div *ngIf="responseType === 'radio' || responseType === 'checkbox' || responseType === 'multi-select'" class="col-12 mt-3">
+                <label for="">Options <span class="required"> *</span></label>
+                <div *ngFor="let option of options; let i = index" class="row mb-2 align-items-center">
+                  <div class="col-md-5">
+                    <input type="text" [(ngModel)]="option.optionText" name="optionText{{i}}" placeholder="Option {{i + 1}}" />
+                  </div>
+                  
+                  <div class="col-md-5" *ngIf="responseType === 'radio' || responseType === 'checkbox' || responseType === 'multi-select'">
+                    <label for="nextQuestion{{i}}" class="d-inline-block w-100">Next Question</label>
+                    <select [(ngModel)]="option.nextQuestion" name="nextQuestion{{i}}" id="nextQuestion{{i}}">
+                      <option selected value="" disabled>Select next question</option>
+                      <!-- The next question options now come from the dynamic list -->
+                      <option *ngFor="let question of nextQuestionOptions" [value]="question.id">
+                        {{ question.question }}
+                      </option>
+                    </select> 
+                  </div>
+                  
+                  <div class="col-md-2" style="margin-left: 90px; margin-top: 15px;">
+                    <button type="button" class="delete-btn" (click)="deleteOption(i)">Delete</button>
+                  </div>
+                </div>
+                <button type="button" class="add-btn" (click)="addOption()">Add New</button>
+              </div>
+              
+            
+
+            <!-- Constraints Section -->
+            <div class="constraint-wrapper mt-5">
+              <div class="row">
+                <div class="constraint-checkbox input-wrapper mb-3 col-6 col-md-4" style="flex-direction: row; column-gap: 15px; align-items: center;">
+                  <input type="checkbox" id="addConstraint" [(ngModel)]="addConstraint" name="addConstraint" style="width: 20px; height: 16px; cursor: pointer;">
+                  <label for="addConstraint" style="padding-top: 7px;">Add constraint</label>
+                </div>
+
+                <div class="constraint-checkbox input-wrapper mb-3 col-6 col-md-4" style="flex-direction: row; column-gap: 15px; align-items: center;">
+                  <input type="checkbox" id="requiredQuestionCheck" [(ngModel)]="requiredQuestionCheck" (onchange)="updateRequired()" name="requiredQuestionCheck" style="width: 20px; height: 16px; cursor: pointer;">
+                  <label for="requiredQuestionCheck" style="padding-top: 7px;">Required Question</label>
+                </div>
+              </div>
+
+              <div class="constraints-wrapper row" *ngIf="addConstraint">
+                <div class="input-wrapper form-description-wrapper col-12 col-md-4">
+                  <label for="constraintDatatype">Data type</label>
+                  <select id="constraintDatatype" [(ngModel)]="constraintDatatype" name="constraintDatatype">
+                    <option selected value="" disabled>Select data type</option>
+                    <option value="string">string</option>
+                    <option value="number">number</option>
+                    <!-- <option value="date">date</option> -->
+                  </select>
+                </div>
+              
+                <div class="input-wrapper form-description-wrapper col-12 col-md-4">
+                  <label for="constraintType">Constraints</label>
+                  <select id="constraintType" [(ngModel)]="constraintType" name="constraintType">
+                    <option selected value="" disabled>Select constraint type</option>
+                    <!-- Options for string -->
+                    <option *ngIf="constraintDatatype === 'string'" value="min">min</option>
+                    <option *ngIf="constraintDatatype === 'string'" value="max">max</option>
+                    <option *ngIf="constraintDatatype === 'string'" value="pattern">pattern</option>
+              
+                    <!-- Options for number -->
+                    <option *ngIf="constraintDatatype === 'number'" value="min">min</option>
+                    <option *ngIf="constraintDatatype === 'number'" value="max">max</option>
+                  </select>
+                </div>
+              
+                <div class="input-wrapper form-name-wrapper col-12 col-md-4">
+                  <label for="constraintValue">Constraint Value</label>
+                  <input type="text" id="constraintValue" [(ngModel)]="constraintValue" name="constraintValue">
+                </div>
+              
+                <div class="input-wrapper form-name-wrapper col-12 col-md-4 mt-3">
+                  <label for="constraintWarningMessage">Warning Message</label>
+                  <input type="text" id="constraintWarningMessage" [(ngModel)]="constraintWarningMessage" name="constraintWarningMessage">
+                </div>
+              </div>
+              
+
+            </div>
+
+            <!-- Submit Button with dynamic label -->
+            <div class="save-btn-wrapper">
+              <button type="submit" class="btn2" >{{ buttonLabel || 'Create Question' }}</button> <!-- Dynamic button label -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

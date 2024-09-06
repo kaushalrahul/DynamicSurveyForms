@@ -1,0 +1,243 @@
+
+.content-wrapper {
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  .col-md-5 {
+    flex: 0 0 auto;
+    width: 33.666667%;
+}
+
+  .main {
+    margin-left: 285px; 
+    margin-top: 110px; 
+    font-family: "Poppins", sans-serif;
+  }
+  .content-wrapper.collapsed .main {
+    margin-left: 0px; 
+    transition: margin-left 0.3s ease-in-out;
+  }
+
+.heading-wrapper {
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    color: #333; /* Deep red for headings */
+    padding-top: 20px;
+}
+
+.heading-wrapper p {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.main-content {
+    width: 100%;
+}
+
+.form-wrapper {
+    background-color: #fff; /* White background */
+    margin: 0 30px;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 30px 30px 20px;
+}
+
+.form-metadata {
+    margin-bottom: 15px;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333; /* Dark gray for labels */
+    margin-bottom: 5px;
+}
+
+input {
+    border: 1px solid #08556d; /* Light gray border */
+    border-radius: 7px;
+    font-size: 14px;
+    padding: 12px 10px;
+}
+
+input:focus {
+    outline: none; 
+    border: 2px solid #08556d; /* Deep red for focus */
+}
+
+select {
+    border: 1px solid rgb(173, 171, 171); /* Light gray border */
+    border-radius: 7px;
+    font-size: 14px;
+    padding: 12px 10px;
+}
+
+button {
+    border: none;
+    text-align: center;
+    margin-top: 3px;
+    padding: 11px 0;
+    border-radius: 7px;
+    color: #fff; /* White text */
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Button Styles */
+.copy-btn-wrapper button {
+    width: 130px;
+    background-color: #720808; /* Deep red */
+}
+
+.add-section-wrapper {
+    margin-top: 12px;
+}
+
+.add-section-btn-wrapper .btn1 {
+    width: 170px;
+    background-color: #720808; /* Deep red */
+}
+
+.add-section-btn-wrapper .btn2 {
+    width: 140px;
+    margin-left: 10px;
+    background-color: #d1a9a2; /* Lighter red for contrast */
+}
+
+.save-btn-wrapper {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: end;
+    column-gap: 15px;
+}
+
+.save-btn-wrapper .btn1 {
+    width: 120px;
+    color: black;
+    background-color: rgb(235, 235, 235); /* Light gray */
+}
+
+.save-btn-wrapper .btn2 {
+    width: 140px;
+    background-color: rgb(23, 97, 97); /* Deep red */
+}
+
+.sections {
+    width: 100%;
+    margin-top: 30px;
+    padding: 0 10px;
+}
+
+
+
+.delete-btn {
+    background-color: #dc3545; /* Red background */
+    color: #fff; /* White text */
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+.add-btn {
+    width: 140px;
+    background-color: #28a745; /* Green background */
+    color: #fff; /* White text */
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 0;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+
+
+
+
+
+
+#button {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    color: #ffffff; /* Default green color */
+    border: 1px solid #ffffff; /* Default green color */
+    border-radius: 10px; /* Replace with your corner radius value */
+   font-weight: bold;
+    box-shadow: 0 0 0 0 transparent;
+    transition: all 0.2s ease-in;
+  }
+  #button:hover {
+    color: rgb(247, 247, 247);
+    box-shadow: 0 0 30px 0 rgba(2, 185, 251, 0.5); /* Green color with transparency */
+    background-color: #0776a5; 
+    transition: all 0.2s ease-out;
+  }
+  
+  
+  
+  #button:active {
+    box-shadow: 0 0 0 0 transparent;
+    transition: box-shadow 0.2s ease-in;
+  }
+  #button:before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 86%;
+    position: absolute;
+    top: 7%;
+    left: 0%;
+  
+    opacity: 0;
+    background: white;
+    box-shadow: 0 0 15px 3px white;
+    transform: skewX(-20deg);
+  }
+  #button:hover:before {
+    animation: shine 0.75s 0.2s linear;
+  }
+  @keyframes shine {
+    0% {
+      left: -100%;
+      opacity: 0.2;
+      width: 100%;
+      height: 100%;
+  
+    }
+    50% {
+      opacity: 0.1;
+      width: 100%;
+      height: 100%;
+  
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }

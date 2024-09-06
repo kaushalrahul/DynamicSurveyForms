@@ -1,0 +1,107 @@
+<div class="content-wrapper" [class.collapsed]="isSidebarCollapsed">
+  <div class="content">
+
+    <div class="header d-flex justify-content-between align-items-center mb-4">
+      <h2>Forms</h2>
+      <button class="btn btn-primary create-survey-btn" (click)="createSurvey()" id="button">Create Survey</button>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Search forms..." [(ngModel)]="searchQuery">
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="btn btn-light"><i class="fas fa-filter"></i> Filter</button>
+        <button style="margin-left: 30px;" *ngIf="selectedForms.size > 0" class="btn btn-danger delete-btn" (click)="deleteSelectedForms()">Delete Selected</button>
+      </div>
+    </div>
+
+    <div class="user-list">
+      <table class="table ">
+        <thead class="thead-light">
+          <tr>
+            <th><input type="checkbox" (change)="toggleSelectAll($event)"></th>
+            <th (click)="setSort('formName')">
+              Name
+              <span *ngIf="sortColumn === 'formName'">
+                {{ sortDirection === 'asc' ? '▲' : '▼' }}
+              </span>
+            </th>
+            <th (click)="setSort('description')">
+              Description
+              <span *ngIf="sortColumn === 'description'">
+                {{ sortDirection === 'asc' ? '▲' : '▼' }}
+              </span>
+            </th>
+            <th (click)="setSort('responseCount')">
+              Responses
+              <span *ngIf="sortColumn === 'responseCount'">
+                {{ sortDirection === 'asc' ? '▲' : '▼' }}
+              </span>
+            </th>
+            <th (click)="setSort('isPublish')">
+              Published
+              <span *ngIf="sortColumn === 'isPublish'">
+                {{ sortDirection === 'asc' ? '▲' : '▼' }}
+              </span>
+            </th>
+            <th>Share</th>
+            <th>More</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          <tr *ngFor="let form of forms | filter: searchQuery | paginate: { itemsPerPage: 10, currentPage: p }">
+            <td><input type="checkbox" [checked]="isSelected(form.id)" (change)="onCheckboxChange($event, form.id)"></td>
+            <td>{{ form.formName }}</td>
+            <td>{{ form.description }}</td>
+            <td>
+              <button class="btn btn-link p-0" (click)="response(form)">
+                <i class="fas fa-list"></i> {{ form.responseCount }}
+              </button>
+            </td>
+            <td>{{ form.isPublish ? 'Yes' : 'No' }}</td>
+            <td>
+              <button class="btn btn-link p-0" (click)="shareForm(form)">
+                <i class="fas fa-share"></i>
+              </button>
+            </td>
+            <td>
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="viewForm(form)">
+                  <mat-icon>visibility</mat-icon>
+                  <span>View</span>
+                </button>
+                <button mat-menu-item (click)="editForm(form)">
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button mat-menu-item (click)="openDeleteModal(form.id)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <div>Showing {{ p * 10 - 9 }} to {{ p * 10 }} of {{ forms.length }} forms</div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+
+  <div id="shareModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h2>Share Form</h2>
+      <p>Copy the link below to share the form:</p>
+      <input id="formLink" type="text" [value]="currentLink" readonly>
+      <button (click)="copyToClipboard()">Copy Link</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,232 @@
+<div class="content-wrapper" [class.collapsed]="isSidebarCollapsed">
+
+  <section class="main">
+    <div class="container">
+      <div class="heading-wrapper">
+        <p>Update Form</p>
+      </div>
+
+      <div class="main-content" [class.collapsed]="isSidebarCollapsed">
+        <div class="form-wrapper">
+          <form [formGroup]="mainForm" (ngSubmit)="publishForm()">
+            <div class="form-metadata row">
+              <div class="input-wrapper form-name-wrapper col-12 col-md-6">
+                <label for="formName">Form Name <span class="required"> *</span></label>
+                <input type="text" id="formName" formControlName="formName">
+              </div>
+
+              <div class="input-wrapper form-description-wrapper col-12 col-md-6 mt-md-0 mt-3">
+                <label for="formDescription">Form Description</label>
+                <input type="text" id="formDescription" formControlName="formDescription">
+              </div>
+            </div>
+
+            <div class="copy-form-wrapper row">
+              <div class="input-wrapper col-12 col-md-9">
+                <label for="selectForm">Select Form</label>
+                <select id="selectForm">
+                  <option selected value="" disabled>Select Existing Form</option>
+                  <option value="1">Employment Survey Form</option>
+                </select>
+              </div>
+              <div class="copy-btn-wrapper col-12 col-md-3 mt-md-0 mt-3 pt-md-4">
+                <button type="button" id="button">Copy Form</button>
+              </div>
+            </div>
+
+            <div class="add-section-wrapper row">
+              <div class="add-section-btn-wrapper col-12 col-md-4 mt-md-0 mt-3 pt-md-4">
+                <button type="button" class="btn2" data-bs-toggle="modal" data-bs-target="#addSection" id="button">Add New
+                  Section</button>
+              </div>
+            </div>
+
+            <div class="sections">
+              <div class="section mt-4" *ngFor="let section of sections; let i = index">
+                <div class="head-wrapper row">
+                  <div class="section-name-wrapper col-12 col-md-8">
+                    <p>{{ section.name }}</p>
+                  </div>
+
+                  <div class="edit-section-metadata col-12 col-md-4">
+                    <span>
+                      <i data-bs-toggle="modal" data-bs-target="#addSection" class="fa-solid fa-pen-to-square"
+                         data-toggle="tooltip" data-placement="top" title="edit-section"
+                         style="color: black; font-size: 20px; cursor: pointer;">
+                      </i>
+                    </span>
+                    <span class="deleteIcon">
+                      <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#deleteSection"
+                         data-toggle="tooltip" data-placement="top" title="delete-section"
+                         style="color: red; font-size: 20px; cursor: pointer;"
+                         (click)="confirmDeleteSection(i, section.sectionId)">
+                      </i>
+                    </span>
+                  </div>
+                  
+                </div>
+
+                <hr class="divider">
+
+
+
+                <div class="add-question-wrapper row">
+                  <div class="input-wrapper col-12 col-md-8">
+                    <label for="selectQuestion">Select Question</label>
+                    <select id="selectQuestion" (change)="onSelectChange($event)">
+                      <option value="" disabled selected>Select Existing Question</option>
+                      <option *ngFor="let question of questions" [value]="question.id">
+                        {{ question.question }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="add-question-btn-wrapper col-12 col-md-4 mt-md-0 mt-3 pt-md-4">
+                    <button type="button" class="btn1" (click)="onexist(i)" id="button">Add Existing Question</button>
+                  </div>
+
+                 
+
+                  <!-- <div class="questions mt-3" *ngIf="sections[i].selectedQuestions && sections[i].selectedQuestions.length">
+                    <div class="question row mt-3" *ngFor="let question of sections[i].selectedQuestions">
+                      <div class="col-12 col-md-10">
+                        <div class="d-flex" style="flex-direction: row;">
+                          <div class="question-name-wrapper">
+                            <p><span>1 :</span> {{ question.question }}</p>
+                          </div>
+                          <span class="answertype cold"
+                            style="height: 25px; margin-left: 15px; text-align: center; color: #fff; background-color: #f77f00; font: bold; padding: 0 10px; border-radius: 5px;">
+                            <p>{{ question.responseType }}</p>
+                          </span>
+                        </div>
+                  
+                        <div class="answer-type row">
+                          <div *ngFor="let option of question.answerOptions">
+                            <label>{{ option.optionValue }}</label>
+                          </div>
+                        </div>
+                      </div>
+                  
+                      <div class="col-12 col-md-2 mt-md-0 mt-3">
+                        <span class="editIcon" (click)="editQuestion(question.id)">
+                          <i class="fa-solid fa-pen-to-square"
+                            style="color: black; font-size: 20px; cursor: pointer;"
+                            title="edit-question"></i>
+                        </span>
+                  
+                        <span class="deleteIcon" (click)="deleteQuestion(question.id, section.sectionId)">
+                          <i class="fa-solid fa-trash" style="color:red; font-size: 20px; cursor: pointer;"
+                            title="delete-question"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div> -->
+                  
+                  <div class="questions mt-3" *ngIf="sections[i].selectedQuestions && sections[i].selectedQuestions.length">
+                    <div class="question row mt-3" *ngFor="let question of sections[i].selectedQuestions; let qIndex = index">
+                      <div class="col-12 col-md-10">
+                        <div class="d-flex" style="flex-direction: row;">
+                          <div class="question-name-wrapper">
+                            <p><span>{{ qIndex + 1 }} :</span> {{ question.question }}</p>
+                          </div>
+                          <span class="answertype cold"
+                            style="height: 25px; margin-left: 15px; text-align: center; color: #fff; background-color: #f77f00; font: bold; padding: 0 10px; border-radius: 5px;">
+                            <p>{{ question.responseType }}</p>
+                          </span>
+                        </div>
+                  
+                        <div class="answer-type row">
+                          <div *ngFor="let option of question.answerOptions">
+                            <label>{{ option.optionValue }}</label>
+                          </div>
+                        </div>
+                      </div>
+                  
+                      <div class="col-12 col-md-2 mt-md-0 mt-3">
+                        <span class="editIcon" (click)="editQuestion(question.id)">
+                          <i class="fa-solid fa-pen-to-square"
+                            style="color: black; font-size: 20px; cursor: pointer;"
+                            title="edit-question"></i>
+                        </span>
+                  
+                        <span class="deleteIcon" (click)="deleteQuestion(question.id, section.sectionId)">
+                          <i class="fa-solid fa-trash" style="color:red; font-size: 20px; cursor: pointer;"
+                            title="delete-question"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                
+                </div>
+
+
+
+
+
+              </div>
+            </div>
+
+            <div class="save-btn-wrapper">
+              <button type="button" class="btn1" (click)="saveDraft()" > Save Draft</button>
+              <button type="submit" class="btn2" (click)="publishForm()" id="button">Publish Form</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="addSection" class="modal fade modal-lg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="dialog">
+      <div class="modal-content">
+        <form>
+          <div class="modal-header custom-modal-header">
+            <p>Add New Section</p>
+          </div>
+          <div class="modal-body">
+            <form class="row">
+              <div class="input-wrapper col-12 col-md-4">
+                <label for="sectionName">Section Name <span class="required"> *</span> </label>
+                <input type="text" id="sectionName" [(ngModel)]="sectionName" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="input-wrapper col-12 col-md-4">
+                <label for="sortOrder">Sort Order <span class="required"> *</span> </label>
+                <input type="number" id="sortOrder" [(ngModel)]="sortOrder" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="input-wrapper col-12 col-md-4">
+                <label for="description">Description <span class="required"> *</span> </label>
+                <input type="text" id="description" [(ngModel)]="description" [ngModelOptions]="{standalone: true}">
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn1" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn2" (click)="addSection()">Add Section</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="deleteSection" class="modal fade modal-lg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="dialog">
+      <div class="modal-content">
+        <form>
+          <div class="modal-header custom-modal-header">
+            <p>Delete Section</p>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete this section?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn1" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn2" (click)="deleteSection()">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,77 @@
+.questions-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .questions-table th, .questions-table td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .questions-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .questions-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .questions-table td {
+    border: 1px solid #ddd;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+  
+  .edit-btn {
+    background-color: #4CAF50; 
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #f44336; 
+    color: white;
+  }
+  
+  .edit-btn:hover, .delete-btn:hover {
+    opacity: 0.8;
+  }
+  .content-wrapper {
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  .col-md-5 {
+    flex: 0 0 auto;
+    width: 33.666667%;
+  }
+  
+  .main {
+    margin-left: 285px; 
+    margin-top: 110px; 
+    font-family: "Poppins", sans-serif;
+  }
+  .content-wrapper.collapsed .main {
+    margin-left: 0px; 
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  .heading-wrapper {
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    color: #333; 
+    padding-top: 20px;
+  }
+  
+  .heading-wrapper p {
+    font-size: 25px;
+    font-weight: 600;
+  }
+  
+  .main-content {
+    width: 100%;
+  }

@@ -1,0 +1,39 @@
+<div class="content-wrapper" [class.collapsed]="isSidebarCollapsed">
+  <section class="main">
+    <div class="container">
+      
+      <div class="main-content">
+  <h2>Termination Checklist </h2>
+  <nav id="nav"> 
+    <a href="#">Form Manager</a> >
+    <a href="#">Termination Checklist Entries</a> >
+    <a href="#">Entry {{id}}</a>
+  </nav>
+
+  <div class="status-bar">
+    <div>
+      <span>
+        <strong>Email ID : </strong>{{email}}
+
+      </span>
+
+    </div>
+  </div>
+
+  <div class="entry-navigation">
+    <!-- <button>&lt;</button> -->
+    <span>ENTRY {{id}}</span>
+    <!-- <button>&gt;</button> -->
+  </div>
+
+  <div class="entry-details">
+    <div *ngIf="questionAnswerPairs.length">
+      <h3>Responses</h3>
+      <div *ngFor="let pair of questionAnswerPairs">
+        <p><strong>Question:</strong> {{ pair.question }}</p>
+        <p><strong>Answer:</strong> {{ pair.answer }}</p>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>

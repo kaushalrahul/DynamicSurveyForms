@@ -1,0 +1,25 @@
+<div class="content-wrapper" [class.collapsed]="isSidebarCollapsed">
+  <section class="main">
+    <div class="container">
+
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+<table *ngIf="!loading && !error" border="1" class="questions-table">
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Response Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let question of questions">
+      <td>{{ question.question }}</td>
+      <td>{{ question.responseType }}</td>
+      <td>
+        <button (click)="editQuestion(question.id)" class="edit-btn">Edit</button>
+        <button (click)="deleteQuestion(question.id)" class="delete-btn">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

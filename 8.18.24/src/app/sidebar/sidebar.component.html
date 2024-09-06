@@ -1,0 +1,30 @@
+<div class="sidebar" [class.collapsed]="isSidebarCollapsed">
+
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/app/dashboard" routerLinkActive="active">
+          <img src="assets/layout-dashboard.svg" alt="Dashboard Icon" class="icon">
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a (click)="toggleSubMenu()">
+          <img src="assets/forms.svg" alt="Manage User Icon" class="icon">
+          Manage Forms
+          <span [class.rotated]="isSubMenuOpen" class="arrow">
+            <img src="assets/down-arrow.svg" alt="down-arrow" />
+          </span>
+        </a>
+        <ul *ngIf="isSubMenuOpen" class="sub-menu">
+            <a href="/app/create-form">Create Form</a>
+            <a href="/app/add-question">Create Questions</a>
+            <a href="/app/questions-list">Question List</a>
+            <a href="/app/dashboard">Responses</a>
+          
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  
+</div>

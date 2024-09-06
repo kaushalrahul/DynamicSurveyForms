@@ -1,0 +1,47 @@
+  <h1>Form Details</h1>
+  <div class="container">
+    
+    <div *ngIf="sectionsDatas">
+      <h3>Sections:</h3>
+      <ul>
+        <li *ngFor="let section of sectionsDatas">
+          <h4>{{ section.sectionName }}</h4>
+    
+          <div *ngFor="let question of section.questions">
+            <p><strong>Question:</strong> {{ question.questionText }}</p>
+    
+            <div [ngSwitch]="question.answerType">
+    
+              <div *ngSwitchCase="'text'">
+                <input type="text" [placeholder]="question.questionText" />
+              </div>
+    
+              <div *ngSwitchCase="'options'">
+                <select>
+                  <option *ngFor="let option of question.answerOptions" [value]="option.id">
+                    {{ option.optionValue }}
+                  </option>
+                </select>
+              </div>
+    
+              <div *ngSwitchDefault>
+                <ul>
+                  <li *ngFor="let option of question.answerOptions">
+                    {{ option.optionValue }}
+                  </li>
+                </ul>
+              </div>
+    
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
+
+

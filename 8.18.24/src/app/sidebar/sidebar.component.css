@@ -1,0 +1,126 @@
+.sidebar {
+  background-color: #08556d;
+  color: white;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 0px;
+  left: -100%;
+}
+
+.sidebar h1 {
+  font-size: 24px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  padding: 10px 20px;
+}
+
+.sidebar.collapsed h1 {
+  display: none;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 20px;
+}
+
+.sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar nav ul li a .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  fill: currentColor;
+}
+
+.sidebar.collapsed nav ul li a {
+  justify-content: center;
+}
+
+.sidebar.collapsed nav ul li a .icon {
+  margin-right: 0;
+}
+
+.sidebar nav ul li a.active {
+  padding: 12px;
+  color: #08556d;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.sidebar nav ul li a.active .icon {
+  fill: currentColor;
+  filter: brightness(.7);
+}
+
+.arrow {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+  transform: rotate(-90deg);
+}
+
+.arrow.rotated {
+  transform: rotate(0deg);
+}
+
+.sub-menu {
+  margin-left: 30px;
+  padding: 20px;
+  padding-left: 30px;
+}
+.sub-menu li a{
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+  padding-left: 30px;
+}
+.sub-menu li a.active {
+  background-color: white;
+  color:#08556d;
+  border-radius: 10px;
+}
+
+li {
+  cursor: pointer;
+}
+.logout-container {
+  bottom: 0;
+}
+
+.logout {
+  width: 28px;
+  height: 28px;
+}
+
+.logout-btn {
+  display: flex;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  background-color: #08556d;
+  transition: background-color 0.3s ease;
+  position: fixed;
+  bottom: 0;
+}
